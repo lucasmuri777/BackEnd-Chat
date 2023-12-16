@@ -13,6 +13,7 @@ import * as SearchController from '../controllers/searchController';
 const router = Router();
 
 router.post('/login', AccountController.login);
+router.get('/ping', AccountController.ping);
 router.post('/register', AccountController.register);
 router.post('/hasUser', AccountController.hasUser);
 router.post('/userInfos',Auth.private ,AccountController.getUserInfos);
@@ -36,4 +37,5 @@ router.post('/sendMessage', Auth.private, upload.single('image'), MessagesContro
 router.get('/renderMessages/:type/:id', Auth.private, MessagesController.renderMessages);
 
 router.post('/search', Auth.private, SearchController.search);
+
 export default router;

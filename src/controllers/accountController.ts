@@ -13,6 +13,10 @@ type UserSendInfosType = {
     email: string;
     photo: string;
 }
+export const ping = (req: Request, res: Response) => {
+    res.json({status: true});
+    return;
+}
 export const register = async (req: Request, res: Response) => {
     if(req.body.email && req.body.password && req.body.name){
         let { email, password, name } = req.body;
