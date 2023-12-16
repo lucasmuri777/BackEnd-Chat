@@ -14,7 +14,7 @@ mongoConnect();
 
 export const server = express();
 
-server.use(cors({origin: 'https://front-end-chat-lucasmuri777.vercel.app'}));
+server.use(cors());
 server.use(express.json());
 server.use(express.static(path.join(__dirname, '../public')));
 server.use(express.urlencoded({ extended: true }));
