@@ -16,7 +16,7 @@ export const server = express();
 
 server.use(cors(
     {
-        origin: process.env.CLIENT,
+        origin: 'https://front-end-chat-lucasmuri777.vercel.app',
     }
 ));
 server.use(express.json());
