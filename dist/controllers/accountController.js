@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.renderInvites = exports.editUser = exports.getUserInfos = exports.hasUser = exports.home = exports.login = exports.register = void 0;
+exports.renderInvites = exports.editUser = exports.getUserInfos = exports.hasUser = exports.home = exports.login = exports.register = exports.ping = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -20,6 +20,11 @@ const User_1 = __importDefault(require("../models/User"));
 const Chats_1 = __importDefault(require("../models/Chats"));
 const accountContext_1 = require("../helpers/accountContext");
 dotenv_1.default.config();
+const ping = (req, res) => {
+    res.json({ status: true });
+    return;
+};
+exports.ping = ping;
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.body.email && req.body.password && req.body.name) {
         let { email, password, name } = req.body;

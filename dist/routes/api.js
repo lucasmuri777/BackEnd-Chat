@@ -34,6 +34,7 @@ const SearchController = __importStar(require("../controllers/searchController")
 //configurando o multer para envio de imagens
 const router = (0, express_1.Router)();
 router.post('/login', AccountController.login);
+router.get('/ping', AccountController.ping);
 router.post('/register', AccountController.register);
 router.post('/hasUser', AccountController.hasUser);
 router.post('/userInfos', auth_1.Auth.private, AccountController.getUserInfos);

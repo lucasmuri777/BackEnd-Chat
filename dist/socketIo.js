@@ -16,7 +16,7 @@ exports.httpServer = httpServer;
 //passo o server http para o socketio
 const socketIo = new socket_io_1.Server(httpServer, {
     cors: {
-        origin: '*',
+        origin: process.env.CLIENT,
     }
 });
 exports.socketIo = socketIo;
