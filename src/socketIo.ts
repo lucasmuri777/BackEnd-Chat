@@ -12,7 +12,7 @@ const httpServer = createServer(server);
 //passo o server http para o socketio
 const socketIo: Io = new Io(httpServer, {
     cors: {
-        origin: 'https://front-end-chat-lucasmuri777.vercel.app',
+        origin: '*',
     }
 });
 
