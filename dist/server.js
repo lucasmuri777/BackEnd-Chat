@@ -16,7 +16,7 @@ dotenv_1.default.config();
 (0, mongo_1.mongoConnect)();
 exports.server = (0, express_1.default)();
 exports.server.use((0, cors_1.default)({
-    origin: 'https://front-end-chat-beta.vercel.app',
+    origin: ['https://front-end-chat-beta.vercel.app', 'http://front-end-chat-beta.vercel.app'],
     optionsSuccessStatus: 200 // Alguns navegadores antigos (IE11, por exemplo) precisam disso
 }));
 exports.server.use(express_1.default.json());
