@@ -18,14 +18,17 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const mongoConnect = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log('Connectando no Banco De Dados');
+        console.log('Conectando no Banco De Dados');
         yield (0, mongoose_1.connect)(process.env.MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
     }
     catch (error) {
-        console.log('erro' + error);
+        console.error('Erro ao conectar ao MongoDB:', error);
+        throw new Error('Erro ao conectar ao MongoDB');
+        // Ou então, você pode personalizar a mensagem de erro lançada para algo mais específico.
+        // throw new Error(`Erro ao conectar ao MongoDB: ${error.message}`);
     }
 });
 exports.mongoConnect = mongoConnect;

@@ -17,6 +17,7 @@ server.use(cors({
     origin: 'https://front-end-chat-beta.vercel.app',
     optionsSuccessStatus: 200 // Alguns navegadores antigos (IE11, por exemplo) precisam disso
 }));
+
 server.use(express.json());
 server.use(express.static(path.join(__dirname, '../public')));
 server.use(express.urlencoded({ extended: true }));
