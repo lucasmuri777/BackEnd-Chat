@@ -35,4 +35,4 @@ const errorHandler = (err, req, res, next) => {
 };
 exports.server.use(errorHandler);
 exports.server.listen(process.env.PORT);
-socketIo_1.httpServer.listen(3333);
+socketIo_1.httpServer.listen(process.env.PORT_SOCKET);
