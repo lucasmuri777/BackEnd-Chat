@@ -15,8 +15,14 @@ const api_1 = __importDefault(require("./routes/api"));
 dotenv_1.default.config();
 (0, mongo_1.mongoConnect)();
 exports.server = (0, express_1.default)();
+exports.server.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    next();
+});
 exports.server.use((0, cors_1.default)({
-    origin: 'https://front-end-chat-beta.vercel.app',
+    origin: 'https://front-end-chat-beta.vercel.app/',
     methods: ['GET', 'POST'],
     credentials: true
 }));
