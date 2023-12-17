@@ -15,11 +15,17 @@ mongoConnect();
 export const server = express();
 
 server.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); // Permite acesso a partir de qualquer origem
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    server.use(cors());  
-    next();
+    res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+  // Verifica se é uma solicitação OPTIONS
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200); // Responde com sucesso para a solicitação OPTIONS
+  } else {
+    next(); // Passa para o próximo middleware
+  }
+
 })
 server.use(express.json());
 server.use(express.static(path.join(__dirname, '../public')));

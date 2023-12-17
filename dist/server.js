@@ -7,7 +7,6 @@ exports.server = void 0;
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
-const cors_1 = __importDefault(require("cors"));
 const mongo_1 = require("./instances/mongo");
 const multer_1 = require("multer");
 const socketIo_1 = require("./socketIo"); // Importe httpServer e socketIo do arquivo socketSetup.js
@@ -16,11 +15,16 @@ dotenv_1.default.config();
 (0, mongo_1.mongoConnect)();
 exports.server = (0, express_1.default)();
 exports.server.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); // Permite acesso a partir de qualquer origem
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    exports.server.use((0, cors_1.default)());
-    next();
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    // Verifica se é uma solicitação OPTIONS
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200); // Responde com sucesso para a solicitação OPTIONS
+    }
+    else {
+        next(); // Passa para o próximo middleware
+    }
 });
 exports.server.use(express_1.default.json());
 exports.server.use(express_1.default.static(path_1.default.join(__dirname, '../public')));
