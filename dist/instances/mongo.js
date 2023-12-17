@@ -25,7 +25,38 @@ const mongoConnect = () => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
-        console.log(error);
+        console.log('erro' + error);
     }
 });
 exports.mongoConnect = mongoConnect;
+/*import { MongoClient, MongoClientOptions, ServerApiVersion } from 'mongodb';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+export const mongoConnect = async () => {
+
+    const clientOptions: MongoClientOptions = {
+        serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+        }
+    };
+
+    const client = new MongoClient(process.env.MONGO_URL as string, clientOptions);
+
+    try {
+        console.log('Conectando ao banco de dados...');
+
+        await client.connect();
+        await client.db("admin").command({ ping: 1 });
+        console.log("Ping realizado com sucesso. Conexão estabelecida com o MongoDB!");
+    } finally {
+        await client.close();
+        console.log("Conexão encerrada.");
+    }
+};
+
+// Chamar a função mongoConnect para iniciar a conexão
+mongoConnect().catch(console.error);*/ 
