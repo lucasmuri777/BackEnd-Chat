@@ -19,10 +19,7 @@ dotenv_1.default.config();
 const mongoConnect = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log('Conectando no Banco De Dados');
-        yield (0, mongoose_1.connect)(process.env.MONGO_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        yield (0, mongoose_1.connect)(process.env.MONGO_URL);
     }
     catch (error) {
         console.error('Erro ao conectar ao MongoDB:', error);

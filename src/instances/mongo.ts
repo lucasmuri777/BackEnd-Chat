@@ -5,10 +5,7 @@ dotenv.config();
 export const mongoConnect = async (): Promise<void> => {
     try {
         console.log('Conectando no Banco De Dados');
-        await connect(process.env.MONGO_URL as string, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        } as ConnectOptions);
+        await connect(process.env.MONGO_URL as string);
     } catch (error) {
         console.error('Erro ao conectar ao MongoDB:', error);
         throw new Error('Erro ao conectar ao MongoDB');
