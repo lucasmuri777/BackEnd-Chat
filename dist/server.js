@@ -19,9 +19,9 @@ exports.server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'https://front-end-chat-beta.vercel.app');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    exports.server.use((0, cors_1.default)());
     next();
 });
-exports.server.use((0, cors_1.default)());
 exports.server.use(express_1.default.json());
 exports.server.use(express_1.default.static(path_1.default.join(__dirname, '../public')));
 exports.server.use(express_1.default.urlencoded({ extended: true }));
