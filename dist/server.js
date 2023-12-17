@@ -15,10 +15,7 @@ const api_1 = __importDefault(require("./routes/api"));
 dotenv_1.default.config();
 (0, mongo_1.mongoConnect)();
 exports.server = (0, express_1.default)();
-exports.server.use((0, cors_1.default)({
-    origin: ['https://front-end-chat-beta.vercel.app', 'http://front-end-chat-beta.vercel.app'],
-    optionsSuccessStatus: 200 // Alguns navegadores antigos (IE11, por exemplo) precisam disso
-}));
+exports.server.use((0, cors_1.default)());
 exports.server.use(express_1.default.json());
 exports.server.use(express_1.default.static(path_1.default.join(__dirname, '../public')));
 exports.server.use(express_1.default.urlencoded({ extended: true }));
