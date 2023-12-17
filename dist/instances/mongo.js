@@ -23,7 +23,6 @@ const mongoConnect = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     catch (error) {
         console.error('Erro ao conectar ao MongoDB:', error);
-        throw new Error('Erro ao conectar ao MongoDB');
         // Ou então, você pode personalizar a mensagem de erro lançada para algo mais específico.
         // throw new Error(`Erro ao conectar ao MongoDB: ${error.message}`);
     }

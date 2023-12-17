@@ -8,7 +8,6 @@ export const mongoConnect = async (): Promise<void> => {
         await connect(process.env.MONGO_URL as string);
     } catch (error) {
         console.error('Erro ao conectar ao MongoDB:', error);
-        throw new Error('Erro ao conectar ao MongoDB');
         // Ou então, você pode personalizar a mensagem de erro lançada para algo mais específico.
         // throw new Error(`Erro ao conectar ao MongoDB: ${error.message}`);
     }
