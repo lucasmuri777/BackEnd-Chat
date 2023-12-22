@@ -38,18 +38,18 @@ router.get('/ping', AccountController.ping);
 router.post('/register', AccountController.register);
 router.post('/hasUser', AccountController.hasUser);
 router.post('/userInfos', auth_1.Auth.private, AccountController.getUserInfos);
-router.post('/editUser', auth_1.Auth.private, multer_1.upload.single('image'), AccountController.editUser);
+router.post('/editUser', auth_1.Auth.private, multer_1.upload, AccountController.editUser);
 router.get('/renderInvites', auth_1.Auth.private, AccountController.renderInvites);
 router.get('/home', auth_1.Auth.private, AccountController.home);
 //chats routers controllers
-router.post('/createChat', auth_1.Auth.private, multer_1.upload.single('image'), ChatController.createChat);
+router.post('/createChat', auth_1.Auth.private, multer_1.upload, ChatController.createChat);
 router.post('/enterChat', auth_1.Auth.private, ChatController.enterChat);
 //invites/friends routers controllers
 router.post('/sendInvite', auth_1.Auth.private, FriendController.sendInvite);
 router.post('/inviteAccept', auth_1.Auth.private, FriendController.inviteAccept);
 router.post('/remove', auth_1.Auth.private, FriendController.removeInviteAndRemoveFriend);
 //mensagens routers controllers
-router.post('/sendMessage', auth_1.Auth.private, multer_1.upload.single('image'), MessagesController.sendMessage);
+router.post('/sendMessage', auth_1.Auth.private, multer_1.upload, MessagesController.sendMessage);
 router.get('/renderMessages/:type/:id', auth_1.Auth.private, MessagesController.renderMessages);
 router.post('/search', auth_1.Auth.private, SearchController.search);
 exports.default = router;

@@ -3,6 +3,8 @@ import chats, {ChatType} from '../models/Chats';
 import users from '../models/User';
 import messages from '../models/Messages';
 import { userContext } from "../helpers/accountContext";
+import { getGeneratedFileName } from '../helpers/multer';
+
 
 export const sendMessage = async (req: Request, res: Response) => {
     if(req.headers.authorization && req.body.id && req.body.message && req.body.type){
@@ -18,9 +20,9 @@ export const sendMessage = async (req: Request, res: Response) => {
 
 
                         if(isMember != -1){
-            
+                            const generatedFileName = getGeneratedFileName();
                             if(req.file){
-                                filename = req.file.filename
+                                filename = generatedFileName;
                             }
 
                             let messageData = await messages.create({
@@ -49,8 +51,9 @@ export const sendMessage = async (req: Request, res: Response) => {
                     if(friend){
                         let isFriend = friend.friends.indexOf(user.email)
                         if(isFriend != -1){
+                            const generatedFileName = getGeneratedFileName();
                             if(req.file){
-                                filename = req.file.filename
+                                filename = generatedFileName;
                             }
                             
                             let messageData = await messages.create({

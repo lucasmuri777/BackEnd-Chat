@@ -5,6 +5,9 @@ import bcrypt from 'bcrypt';
 import  users, {UserType}  from '../models/User';
 import chats  from '../models/Chats';
 import { userContext } from "../helpers/accountContext";
+import {storage} from '../instances/firebase';
+import { getGeneratedFileName } from '../helpers/multer';
+
 
 dotenv.config()
 type UserSendInfosType = {
@@ -33,7 +36,7 @@ export const register = async (req: Request, res: Response) => {
             email,
             password,
             name,
-            photo: 'default-perfil.jpg'
+            photo: 'default-perfil'
         }
         try{
             let newUser = await users.create(user);
@@ -141,7 +144,6 @@ export const hasUser = async (req: Request, res: Response) => {
             let {id} = req.body;
             let user = await users.findById(id);
             let decoded = userContext(req);
-            console.log(user)
             if(decoded){
                 if(user){
                     if(user._id == decoded.id){
@@ -206,18 +208,19 @@ export const editUser = async (req: Request, res: Response) => {
         const user = userContext(req);
         if(user){
             if(user.id == req.body.id){
-
+                console.log('oi')
                 try{
                     let hasUser = await users.findById(req.body.id);
                     if(hasUser){
                         let {name} = req.body;
                         hasUser.name = name;
                         if(req.body.removeImage == 'true'){
-                            hasUser.photo = 'default-perfil.jpg';
+                            hasUser.photo = 'default-perfil';
                         }
-                        
+                        const generatedFileName = getGeneratedFileName();
                         if(req.file && req.body.removeImage == 'false'){
-                            hasUser.photo = req.file.filename;
+                            hasUser.photo = generatedFileName;
+                            console.log(generatedFileName);
                         }
                         await hasUser.save();
                         res.status(200)

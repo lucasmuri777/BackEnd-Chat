@@ -17,6 +17,7 @@ const Chats_1 = __importDefault(require("../models/Chats"));
 const User_1 = __importDefault(require("../models/User"));
 const Messages_1 = __importDefault(require("../models/Messages"));
 const accountContext_1 = require("../helpers/accountContext");
+const multer_1 = require("../helpers/multer");
 const sendMessage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.headers.authorization && req.body.id && req.body.message && req.body.type) {
         let user = (0, accountContext_1.userContext)(req);
@@ -29,8 +30,9 @@ const sendMessage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                     if (chat) {
                         let isMember = chat.members.indexOf(user.email);
                         if (isMember != -1) {
+                            const generatedFileName = (0, multer_1.getGeneratedFileName)();
                             if (req.file) {
-                                filename = req.file.filename;
+                                filename = generatedFileName;
                             }
                             let messageData = yield Messages_1.default.create({
                                 author: user.email,
@@ -58,8 +60,9 @@ const sendMessage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                     if (friend) {
                         let isFriend = friend.friends.indexOf(user.email);
                         if (isFriend != -1) {
+                            const generatedFileName = (0, multer_1.getGeneratedFileName)();
                             if (req.file) {
-                                filename = req.file.filename;
+                                filename = generatedFileName;
                             }
                             let messageData = yield Messages_1.default.create({
                                 author: user.email,

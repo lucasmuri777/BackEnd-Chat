@@ -19,6 +19,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const User_1 = __importDefault(require("../models/User"));
 const Chats_1 = __importDefault(require("../models/Chats"));
 const accountContext_1 = require("../helpers/accountContext");
+const multer_1 = require("../helpers/multer");
 dotenv_1.default.config();
 const ping = (req, res) => {
     res.json({ status: true });
@@ -40,7 +41,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             email,
             password,
             name,
-            photo: 'default-perfil.jpg'
+            photo: 'default-perfil'
         };
         try {
             let newUser = yield User_1.default.create(user);
@@ -135,7 +136,6 @@ const hasUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             let { id } = req.body;
             let user = yield User_1.default.findById(id);
             let decoded = (0, accountContext_1.userContext)(req);
-            console.log(user);
             if (decoded) {
                 if (user) {
                     if (user._id == decoded.id) {
@@ -197,16 +197,19 @@ const editUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const user = (0, accountContext_1.userContext)(req);
         if (user) {
             if (user.id == req.body.id) {
+                console.log('oi');
                 try {
                     let hasUser = yield User_1.default.findById(req.body.id);
                     if (hasUser) {
                         let { name } = req.body;
                         hasUser.name = name;
                         if (req.body.removeImage == 'true') {
-                            hasUser.photo = 'default-perfil.jpg';
+                            hasUser.photo = 'default-perfil';
                         }
+                        const generatedFileName = (0, multer_1.getGeneratedFileName)();
                         if (req.file && req.body.removeImage == 'false') {
-                            hasUser.photo = req.file.filename;
+                            hasUser.photo = generatedFileName;
+                            console.log(generatedFileName);
                         }
                         yield hasUser.save();
                         res.status(200);

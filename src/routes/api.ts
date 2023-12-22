@@ -18,13 +18,13 @@ router.post('/register', AccountController.register);
 router.post('/hasUser', AccountController.hasUser);
 router.post('/userInfos',Auth.private ,AccountController.getUserInfos);
 
-router.post('/editUser',Auth.private, upload.single('image'),AccountController.editUser);
+router.post('/editUser',Auth.private, upload,AccountController.editUser);
 
 router.get('/renderInvites', Auth.private, AccountController.renderInvites);
 router.get('/home', Auth.private , AccountController.home);
 
 //chats routers controllers
-router.post('/createChat',Auth.private, upload.single('image') ,  ChatController.createChat);
+router.post('/createChat',Auth.private, upload,  ChatController.createChat);
 router.post('/enterChat', Auth.private, ChatController.enterChat);
 
 //invites/friends routers controllers
@@ -33,7 +33,7 @@ router.post('/inviteAccept', Auth.private, FriendController.inviteAccept)
 router.post('/remove', Auth.private, FriendController.removeInviteAndRemoveFriend)
 
 //mensagens routers controllers
-router.post('/sendMessage', Auth.private, upload.single('image'), MessagesController.sendMessage);
+router.post('/sendMessage', Auth.private, upload, MessagesController.sendMessage);
 router.get('/renderMessages/:type/:id', Auth.private, MessagesController.renderMessages);
 
 router.post('/search', Auth.private, SearchController.search);
