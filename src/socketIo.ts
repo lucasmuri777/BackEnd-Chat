@@ -11,7 +11,8 @@ const httpServer = createServer(server);
 // Inicialize o Socket.IO passando o servidor HTTP criado
 const socketIo = new Io(httpServer,{
     cors: {
-        origin: '*',
+        origin: 'https://front-end-chat-beta.vercel.app',
+        credentials: true
     }
 });
 
