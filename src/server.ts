@@ -40,4 +40,3 @@ const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Respon
 server.use(errorHandler);
 
 server.listen(process.env.PORT);
-httpServer.listen(process.env.PORT_SOCKET);
