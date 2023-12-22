@@ -10,6 +10,7 @@ const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const mongo_1 = require("./instances/mongo");
 const multer_1 = require("multer");
+const socketIo_1 = require("./socketIo"); // Importe httpServer e socketIo do arquivo socketSetup.js
 const api_1 = __importDefault(require("./routes/api"));
 dotenv_1.default.config();
 (0, mongo_1.mongoConnect)();
@@ -34,3 +35,4 @@ const errorHandler = (err, req, res, next) => {
 };
 exports.server.use(errorHandler);
 exports.server.listen(process.env.PORT);
+socketIo_1.httpServer.listen(process.env.PORT_SOCKET);
